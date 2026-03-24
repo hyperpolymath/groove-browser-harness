@@ -1,0 +1,59 @@
+{
+  "manifest_version": 2,
+  "name": "Groove Harness",
+  "version": "0.1.0",
+  "description": "Type-safe localhost service discovery for Gossamer, Burble, Vext, and other groove-aware systems. Discovers local services and bridges their capabilities into the browser.",
+  "author": "Jonathan D.A. Jewell",
+  "homepage_url": "https://github.com/hyperpolymath/groove-browser-harness",
+  "icons": {
+    "48": "icons/groove-48.png",
+    "96": "icons/groove-96.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:6473/*",
+    "http://localhost:6480/*",
+    "http://localhost:7500/*",
+    "http://localhost:7600/*",
+    "http://localhost:7700/*",
+    "http://localhost:7800/*",
+    "http://localhost:8000/*",
+    "http://localhost:8080/*",
+    "http://localhost:9000/*",
+    "http://localhost:9090/*",
+    "http://127.0.0.1:6473/*",
+    "http://127.0.0.1:6480/*",
+    "http://127.0.0.1:7500/*",
+    "http://127.0.0.1:7600/*",
+    "http://127.0.0.1:7700/*",
+    "http://127.0.0.1:7800/*",
+    "http://127.0.0.1:8000/*",
+    "http://127.0.0.1:8080/*",
+    "http://127.0.0.1:9000/*",
+    "http://127.0.0.1:9090/*"
+  ],
+  "background": {
+    "scripts": ["background/groove-discovery.js"],
+    "type": "module"
+  },
+  "browser_action": {
+    "default_icon": "icons/groove-48.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Groove Harness"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/groove-bridge.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "groove-harness@hyperpolymath.com",
+      "strict_min_version": "109.0"
+    }
+  }
+}

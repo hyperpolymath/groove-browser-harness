@@ -1,0 +1,5 @@
+# Build artifacts
+web-ext-artifacts/
+*.xpi
+*.zip
+node_modules/
