@@ -1,0 +1,143 @@
+// SPDX-License-Identifier: MPL-2.0
+// (PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores)
+// Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+//
+// QUICKSTART-USER.adoc — Get Groove Browser Harness running from zero
+= Groove Browser Harness Quickstart
+:toc: macro
+:icons: font
+
+toc::[]
+
+== What is Groove Browser Harness?
+
+Groove Browser Harness is a Firefox extension that discovers
+localhost services implementing the Groove protocol. It probes
+well-known ports for services like Burble (voice), VeriSimDB
+(database), Hypatia (scanner), PanLL (panels), and others, then
+exposes their capabilities to web pages via `window.groove`.
+
+No data leaves your machine. The extension only communicates with
+`localhost` / `127.0.0.1` on specific ports.
+
+== Prerequisites
+
+[cols="1,1,2"]
+|===
+| Tool | Version | Install
+
+| Firefox
+| 109+
+| https://www.mozilla.org/firefox/ or `sudo dnf install firefox`
+
+| web-ext _(optional, for dev workflow)_
+| 8+
+| `deno install -g npm:web-ext` or `npm install -g web-ext`
+|===
+
+This is a pure JavaScript browser extension. No build step needed.
+
+== Install (Development Mode)
+
+=== Method 1: Temporary Install (quickest)
+
+1. Open Firefox
+2. Navigate to `about:debugging#/runtime/this-firefox`
+3. Click *"Load Temporary Add-on..."*
+4. Select the `manifest.json` file in this repo
+
+The extension loads immediately. It disappears when Firefox restarts.
+
+=== Method 2: web-ext (auto-reload on changes)
+
+[source,bash]
+----
+cd ~/Documents/hyperpolymath-repos/groove-browser-harness
+web-ext run
+----
+
+Opens a fresh Firefox profile with the extension loaded. Reloads
+automatically when you edit files.
+
+== First Run
+
+1. After loading, click the Groove Harness icon in the toolbar
+2. The popup shows all 10 known Groove targets with their status
+3. Green dot = connected, grey dot = not found
+4. Click *"Probe All"* to re-scan
+
+For any service to show as connected, it must be running on its
+assigned port and serving `GET /.well-known/groove` with a valid
+JSON manifest.
+
+=== Groove Targets
+
+[cols="1,1,2"]
+|===
+| Service | Port | Capabilities
+
+| Burble | 6473 | Voice, audio
+| Vext | 6480 | Validation, linting
+| VeriSimDB | 8080 | Database, drift detection
+| Hypatia | 9090 | Security scanning
+| PanLL | 8000 | Panel management
+| ECHIDNA | 9000 | Formal verification
+| RPA Elysium | 7800 | Browser automation
+| Conflow | 7700 | Workflow orchestration
+| panic-attacker | 7600 | Static analysis
+| gitbot-fleet | 7500 | Bot orchestration
+|===
+
+== Using the Page API
+
+When the extension is active, any web page can use `window.groove`:
+
+[source,javascript]
+----
+// Wait for the API to be ready
+window.addEventListener("groove:ready", async () => {
+  // Discover all services
+  const result = await window.groove.discover();
+  console.log("Connected:", result.connected);
+
+  // Get status of all services
+  const status = await window.groove.status();
+
+  // Find which service provides "voice"
+  const voiceSvc = await window.groove.findCapability("voice");
+
+  // Send a message to Burble
+  const response = await window.groove.send("burble", {
+    action: "status"
+  });
+});
+----
+
+== Project Structure
+
+[source]
+----
+groove-browser-harness/
+  manifest.json              # Firefox extension manifest (MV2)
+  background/
+    groove-discovery.js      # Service discovery + registry + message API
+  content/
+    groove-bridge.js         # Content script: injects window.groove API
+  popup/
+    popup.html               # Extension popup UI
+    popup.js                 # Popup rendering logic
+  icons/
+    groove-48.png            # Extension icon (48x48)
+    groove-96.png            # Extension icon (96x96)
+----
+
+== Key Recipes
+
+[source,bash]
+----
+just               # List all recipes
+just run           # Launch Firefox with extension loaded (web-ext)
+just doctor        # Check prerequisites
+just tour          # Guided walkthrough
+just help-me       # What to do when stuck
+----

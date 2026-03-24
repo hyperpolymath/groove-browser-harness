@@ -1,0 +1,107 @@
+# SPDX-License-Identifier: MPL-2.0
+# (PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores)
+# SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell (hyperpolymath)
+#
+# 0-AI-MANIFEST.a2ml — Universal AI Agent Entry Point
+# Groove Browser Harness — Firefox extension for localhost service discovery
+#
+# READ THIS FILE FIRST. This is the canonical entry point for all AI agents.
+
+[manifest]
+version = "1.0"
+project = "groove-browser-harness"
+type = "browser-extension"
+platform = "Firefox (Manifest V2)"
+license = "MPL-2.0"
+license-note = "PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores"
+author = "Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>"
+repo = "https://github.com/hyperpolymath/groove-browser-harness"
+
+[context-tiers]
+# Tier 0 (always load): This file — orientation only
+# Tier 1 (load if working on code): manifest.json, Justfile, QUICKSTART-USER.adoc
+# Tier 2 (load on demand): .machine_readable/*.contractile, llm-warmup-dev.md
+# Tier 3 (never load unless asked): web-ext-artifacts/, icons/
+#
+# DO NOT READ unless specifically asked:
+#   web-ext-artifacts/ — built .xpi packages
+#   icons/             — extension icons (binary)
+#   *.lock             — lock files
+
+[purpose]
+description = """Type-safe localhost service discovery for Gossamer, Burble, Vext,
+and other groove-aware systems. Discovers local services on known ports and bridges
+their capabilities into the browser. Firefox-first (Manifest V2), no Chrome MV3."""
+
+[tech-stack]
+primary = "JavaScript (browser extension APIs)"
+tooling = "web-ext (Mozilla CLI for extension development)"
+build = "Justfile — just run (dev), just package (.xpi)"
+packaging = "Guix (guix.scm) + Nix (flake.nix)"
+
+[architecture]
+# Three-file extension architecture
+background = "background/groove-discovery.js"    # Service discovery on known ports
+content = "content/groove-bridge.js"             # Content script — bridges services to page
+popup = "popup/popup.html + popup.js + popup.css"  # Browser action popup (status UI)
+manifest = "manifest.json"                        # Firefox Manifest V2
+
+[known-ports]
+# Ports the extension probes for groove-aware services
+groove-core = "6473"       # Groove protocol core
+groove-admin = "6480"      # Groove admin
+burble = "7500"            # Burble voice platform
+vext = "7600"              # Vext extension framework
+boj = "7700"               # Bundle of Joy server
+typell = "7800"            # TypeLL type verification
+panll-dev = "8000"         # PanLL dev server
+verisimdb = "8080"         # VeriSimDB
+echidna = "9000"           # ECHIDNA theorem prover
+prometheus = "9090"        # Prometheus metrics
+
+[structure]
+root = """groove-browser-harness/
+├── 0-AI-MANIFEST.a2ml          # THIS FILE
+├── manifest.json               # Firefox Manifest V2
+├── background/                 # Background scripts
+│   └── groove-discovery.js     # Service discovery + port probing
+├── content/                    # Content scripts
+│   └── groove-bridge.js        # Page-level bridge to discovered services
+├── popup/                      # Browser action popup
+│   ├── popup.html
+│   ├── popup.js
+│   └── popup.css
+├── icons/                      # Extension icons (48px, 96px)
+├── Justfile                    # Build recipes (run, package, lint)
+├── QUICKSTART-USER.adoc        # User quickstart guide
+├── .machine_readable/          # Contractiles (MUST, TRUST, INTENT, ADJUST)
+├── guix.scm                    # Guix package definition
+└── flake.nix                   # Nix flake"""
+
+[critical-invariants]
+invariant-1 = "Firefox-first — Manifest V2 (not Chrome MV3)"
+invariant-2 = "MPL-2.0 license (browser extension store requirement)"
+invariant-3 = "Localhost only — no remote service discovery"
+invariant-4 = "Known ports only — no arbitrary port scanning"
+invariant-5 = "State files in .machine_readable/ ONLY"
+invariant-6 = "Author: Jonathan D.A. Jewell (hyperpolymath)"
+invariant-7 = "No npm/node/bun — web-ext CLI only"
+invariant-8 = "No TypeScript — plain JavaScript for extension code"
+
+[related-projects]
+groove = "Groove universal plug-and-play protocol (Idris2 ABI, Zig FFI)"
+gossamer = "Linearly-typed webview shell — primary discovery target"
+burble = "Voice platform — discovered on port 7500"
+boj-server = "Cartridge server — discovered on port 7700"
+panll = "Neurosymbolic workbench — discovered on port 8000"
+verisimdb = "8-modality database — discovered on port 8080"
+echidna = "Theorem prover — discovered on port 9000"
+
+[session-protocol]
+on-enter = [
+  "Read this manifest",
+  "Check manifest.json for extension configuration",
+]
+on-exit = [
+  "Verify extension loads: just run",
+]

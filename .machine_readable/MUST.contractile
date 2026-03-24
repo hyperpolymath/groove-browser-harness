@@ -1,0 +1,69 @@
+; SPDX-License-Identifier: MPL-2.0
+; (PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores)
+; MUST.contractile — Baseline invariants for groove-browser-harness
+; These constraints MUST NOT be violated. K9 validators enforce them.
+
+(must-contractile
+  (version "1.0.0")
+  (repo "groove-browser-harness")
+
+  ; === Universal Invariants (apply to ALL repos) ===
+
+  (invariants
+    ; Paths
+    (must "no hardcoded absolute paths (/home/*, /mnt/*, /var/mnt/*)")
+    (must "all paths use env vars, XDG dirs, or relative references")
+
+    ; Language policy
+    (must "no new TypeScript files")
+    (must "no new Python files")
+    (must "no new Go files")
+
+    ; Dangerous patterns
+    (must "no unsafe {} blocks without safety comment (Rust)")
+
+    ; License
+    (must "SPDX-License-Identifier header on every source file")
+    (must "no removal or modification of LICENSE file")
+
+    ; Structure
+    (must ".machine_readable/ directory preserved")
+
+    ; Code quality
+    (must "tests must not be deleted or weakened")
+    (must "no introduction of OWASP top 10 vulnerabilities")
+  )
+
+  ; === Project-Specific Invariants (groove-browser-harness) ===
+
+  (invariants
+    ; Localhost-only security
+    (must "host_permissions must be localhost/127.0.0.1 only — no external URLs")
+    (must "no remote code execution — all JS must be bundled locally")
+    (must "content security policy must block inline scripts and remote sources")
+
+    ; Firefox-first
+    (must "manifest_version must be 2 for Firefox compatibility")
+    (must "browser_specific_settings.gecko must be present with valid ID")
+    (must "Firefox is primary target — Chrome MV3 is secondary adaptation")
+
+    ; Groove protocol
+    (must "service discovery must probe only configured localhost ports")
+    (must "capability negotiation must use type-safe Groove protocol")
+    (must "discovered services: Gossamer, Burble, Vext, BoJ, and other groove-aware systems")
+
+    ; Permissions
+    (must "minimal permissions — storage only, no tabs/history/bookmarks")
+    (must "content_scripts must run at document_start for bridge injection")
+    (must "no eval(), no Function() constructor, no dynamic code generation")
+
+    ; Privacy
+    (must "no telemetry, analytics, or phone-home behaviour")
+    (must "no data leaves localhost — all communication is local service discovery")
+  )
+
+  (enforcement
+    (k9-validator "contractiles/k9/must-check.k9.ncl")
+    (ci "quality.yml runs must-check on every PR")
+  )
+)

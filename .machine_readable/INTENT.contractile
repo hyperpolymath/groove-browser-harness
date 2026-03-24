@@ -1,0 +1,56 @@
+; SPDX-License-Identifier: MPL-2.0
+; (PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores)
+; INTENT.contractile — Purpose and scope for groove-browser-harness
+; Helps LLM/SLM agents understand what this repo IS and IS NOT.
+
+(intent-contractile
+  (version "1.0.0")
+  (repo "groove-browser-harness")
+
+  ; === Purpose (what this repo IS) ===
+  (purpose
+    "Groove Browser Harness is a Firefox extension that provides type-safe localhost
+     service discovery for Gossamer, Burble, Vext, BoJ, and other groove-aware systems.
+     It discovers local services running on configured ports and bridges their
+     capabilities into the browser via the Groove protocol. It enables the browser to
+     interact with locally running hyperpolymath services without requiring each service
+     to implement its own browser integration."
+  )
+
+  ; === Anti-Purpose (what this repo is NOT — prevents scope creep) ===
+  (anti-purpose
+    "Groove Browser Harness is NOT a general-purpose browser extension framework. It does
+     NOT connect to remote services — all communication is localhost only. It is NOT a
+     proxy or VPN. It does NOT implement the services it discovers — it only bridges
+     their capabilities. It is NOT a Chrome-first extension — Firefox is primary, Chrome
+     MV3 is a secondary adaptation. It collects no telemetry or analytics."
+  )
+
+  ; === Key Architectural Decisions That Must Not Be Reversed ===
+  (architectural-invariants
+    "Firefox-first — manifest_version 2 with gecko-specific settings"
+    "Localhost-only — host_permissions restricted to 127.0.0.1 and localhost"
+    "Minimal permissions — storage only, no tabs/history/bookmarks"
+    "Type-safe Groove protocol for capability negotiation"
+    "Content script at document_start for bridge injection"
+    "No remote code execution — all JS bundled locally"
+    "No eval(), Function constructor, or dynamic code generation"
+    "MPL-2.0 license (required by browser extension stores)"
+  )
+
+  ; === Sensitive Areas (if in doubt, ask) ===
+  (ask-before-touching
+    "manifest.json — extension metadata; changes affect store listing and permissions"
+    "background/groove-discovery.js — service discovery; changes affect all detected services"
+    "content/groove-bridge.js — injected bridge; runs on every page"
+    "popup/ — user-facing UI; accessibility requirements apply"
+    ".machine_readable/ — checkpoint files, format is specified"
+  )
+
+  ; === Ecosystem Position ===
+  (ecosystem
+    (belongs-to "standalone")
+    (depends-on ("groove-protocol"))
+    (depended-on-by ("gossamer" "burble" "vext" "boj-server"))
+  )
+)
