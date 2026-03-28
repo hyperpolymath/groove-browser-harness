@@ -2,7 +2,7 @@
 // (PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores)
 = groove-browser-harness -- EXPLAINME
 
-== "Type-safe localhost service discovery for Gossamer, Burble, Vext, and other groove-aware systems"
+== Type-safe localhost service discovery for Gossamer, Burble, Vext, and other groove-aware systems
 
 [quote, manifest.json]
 ____
