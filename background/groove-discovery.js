@@ -26,8 +26,8 @@ const GROOVE_TARGETS = [
   { id: 5, name: "echidna",         port: 9000 },
   { id: 6, name: "rpa-elysium",     port: 7800 },
   { id: 7, name: "conflow",         port: 7700 },
-  { id: 8, name: "panic-attacker",  port: 7600 },
-  { id: 9, name: "gitbot-fleet",    port: 7500 },
+  { id: 8, name: "panic-attack",     port: 7600 },
+  { id: 9, name: "gitbot-fleet",    port: 8080 },
 ];
 
 // Probe interval (60 seconds).
