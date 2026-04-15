@@ -8,6 +8,8 @@
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
 # Default recipe: show help
+import? "contractile.just"
+
 default:
     @just --list
 
