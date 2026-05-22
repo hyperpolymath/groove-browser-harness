@@ -4,7 +4,7 @@
 
 Groove Browser Harness — Firefox extension for localhost service discovery
 using the Groove protocol. License: MPL-2.0 (browser store requirement;
-PMPL-1.0-or-later preferred). Author: Jonathan D.A. Jewell.
+MPL-2.0 preferred). Author: Jonathan D.A. Jewell.
 
 ## Architecture
 

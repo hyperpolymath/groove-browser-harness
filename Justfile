@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MPL-2.0
-# (PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores)
+# (MPL-2.0 preferred; MPL-2.0 required for browser extension stores)
 # SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell (hyperpolymath)
 #
 # Justfile — Groove Browser Harness (Firefox extension)
@@ -169,7 +169,7 @@ tour:
     echo ""
     echo "7. LICENSE"
     echo "   MPL-2.0 (required for browser extension stores)."
-    echo "   PMPL-1.0-or-later preferred."
+    echo "   MPL-2.0 preferred."
 
 # What to do when things go wrong
 help-me:

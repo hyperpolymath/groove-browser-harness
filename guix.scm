@@ -1,5 +1,5 @@
 ;; SPDX-License-Identifier: MPL-2.0
-;; (PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores)
+;; (MPL-2.0 preferred; MPL-2.0 required for browser extension stores)
 ;; Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath)
 ;;
 ;; Guix development environment for groove-browser-harness.

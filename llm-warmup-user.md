@@ -61,4 +61,4 @@ Or with web-ext: `just run`
 ## License
 
 MPL-2.0 (required for browser extension stores).
-PMPL-1.0-or-later preferred.
+MPL-2.0 preferred.

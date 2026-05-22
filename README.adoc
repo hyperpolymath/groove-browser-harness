@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-// (PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores)
+// (MPL-2.0 preferred; MPL-2.0 required for browser extension stores)
 // SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 = groove-browser-harness
 :toc: preamble
@@ -121,7 +121,7 @@ Three-file Firefox extension:
 
 == License
 
-MPL-2.0 (browser extension store requirement). PMPL-1.0-or-later is the
+MPL-2.0 (browser extension store requirement). MPL-2.0 is the
 preferred intent; MPL-2.0 is required for Firefox Add-ons and the Chrome Web
 Store.
 

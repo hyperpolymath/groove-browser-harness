@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MPL-2.0
-# (PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores)
+# (MPL-2.0 preferred; MPL-2.0 required for browser extension stores)
 # SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell (hyperpolymath)
 #
 # 0-AI-MANIFEST.a2ml — Universal AI Agent Entry Point
@@ -13,7 +13,7 @@ project = "groove-browser-harness"
 type = "browser-extension"
 platform = "Firefox (Manifest V2)"
 license = "MPL-2.0"
-license-note = "PMPL-1.0-or-later preferred; MPL-2.0 required for browser extension stores"
+license-note = "MPL-2.0 preferred; MPL-2.0 required for browser extension stores"
 author = "Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>"
 repo = "https://github.com/hyperpolymath/groove-browser-harness"
 
